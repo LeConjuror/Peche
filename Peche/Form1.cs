@@ -66,22 +66,22 @@ namespace Peche
                 }
                 if (GetKeyState(hotkey) < 0)
                 {
-                    checkBox1.Invoke((MethodInvoker)delegate {
-                        checkBox1.Checked = !checkBox1.Checked;
+                    hotkey_checkBox.Invoke((MethodInvoker)delegate {
+                        hotkey_checkBox.Checked = !hotkey_checkBox.Checked;
                     });
                     Thread.Sleep(500);
                 }
             }
         }
 
-        void comboBox_init()
+        void intkey_comboBox_init()
         {
             foreach (var intkey in intkeys)
             {
-                comboBox1.Items.Add(intkey.Key);
+                intkey_comboBox.Items.Add(intkey.Key);
             }
-            comboBox1.SelectedIndex = 0;
-            intkey = comboBox1.SelectedItem.ToString();
+            intkey_comboBox.SelectedIndex = 0;
+            intkey = intkey_comboBox.SelectedItem.ToString();
         }
 
         public Form1()
@@ -91,24 +91,23 @@ namespace Peche
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox_init();
+            intkey_comboBox_init();
             Thread FISH = new Thread(peche) { IsBackground = true };
             FISH.Start();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void intkey_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            intkey = comboBox1.SelectedItem.ToString();
-            Console.WriteLine(intkey);
+            intkey = intkey_comboBox.SelectedItem.ToString();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void hotkey_checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (hotkey_checkBox.Checked)
             {
                 is_fishing = true;
-                label1.Text = "Fishing in Progress";
-                label1.ForeColor = System.Drawing.Color.Aqua;
+                fishStatus.Text = "Fishing in Progress";
+                fishStatus.ForeColor = System.Drawing.Color.Aqua;
                 if (beep)
                 {
                     Console.Beep(261, 70);
@@ -119,8 +118,8 @@ namespace Peche
             } else
             {
                 is_fishing = false;
-                label1.Text = "Pas de Peche :(";
-                label1.ForeColor = System.Drawing.Color.Red;
+                fishStatus.Text = "Pas de Peche :(";
+                fishStatus.ForeColor = System.Drawing.Color.Red;
                 if (beep)
                 {
                     Console.Beep(392, 70);
@@ -130,9 +129,9 @@ namespace Peche
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void beep_checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
+            if (beep_checkBox.Checked)
             {
                 beep = true;
             }
